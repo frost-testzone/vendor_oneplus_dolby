@@ -4,6 +4,11 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    libldacBT_abr \
+    libldacBT_enc
+
 # Device Settings
 PRODUCT_PACKAGES += \
     XiaomiDolby
