@@ -3,11 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DOLBY_PATH := vendor/oneplus/dolby
-
 # Media
 PRODUCT_COPY_FILES += \
-    $(DOLBY_PATH)/media/media_codecs_dolby_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_dolby_audio.xml
+    $(LOCAL_PATH)/media/media_codecs_dolby_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_dolby_audio.xml
 
 # Xiaomi Dolby
 PRODUCT_PACKAGES += \
@@ -15,4 +13,4 @@ PRODUCT_PACKAGES += \
     XiaomiDolbyResCommon
 
 # Inherit from proprietary targets
-$(call inherit-product, $(DOLBY_PATH)/dolby-vendor.mk)
+$(call inherit-product, $(LOCAL_PATH)/dolby-vendor.mk)
