@@ -64,6 +64,10 @@ function blob_fixup() {
             "${PATCHELF}" --replace-needed "libcodec2_hidl@1.0.so" "libcodec2_hidl@1.0_sp.so" "${2}"
             "${PATCHELF}" --replace-needed "libcodec2_vndk.so" "libcodec2_vndk_sp.so" "${2}"
             ;;
+        odm/etc/dolby/multimedia_dolby_dax_default.xml)
+            [ "$2" = "" ] && return 0
+            sed -i "/volume-leveler-enable/ s/true/false/g" "${2}"
+            ;;
         odm/lib64/libcodec2_store_dolby_sp.so)
             [ "$2" = "" ] && return 0
             "${PATCHELF}" --replace-needed "libcodec2_vndk.so" "libcodec2_vndk_sp.so" "${2}"
