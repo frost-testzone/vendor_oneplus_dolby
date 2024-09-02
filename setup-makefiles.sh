@@ -30,6 +30,7 @@ setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" true
 # Warning headers and guards
 write_headers "dolby"
 sed -i 's|device/|vendor/|g' "$ANDROIDBP" "$ANDROIDMK" "$BOARDMK" "$PRODUCTMK"
+sed -i '/^\s*owner: "oneplus",/d' "$ANDROIDBP"
 
 write_makefiles "${MY_DIR}/proprietary-files.txt"
 

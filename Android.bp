@@ -9,7 +9,6 @@ soong_namespace {
 
 cc_prebuilt_library_shared {
 	name: "libdapparamstorage_v3_6",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -30,7 +29,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libdeccfg_v3_6",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -51,7 +49,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libdlbdsservice_v3_6",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -72,7 +69,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "vendor.dolby_v3_6.hardware.dms360@2.0",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -93,7 +89,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libstagefright_soft_ddpdec",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -110,7 +105,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libhwdap_v3_6",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -128,7 +122,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libswdap_v3_6",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -146,7 +139,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libcodec2_hidl@1.0_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -163,7 +155,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libcodec2_hidl_plugin_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -180,7 +171,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libcodec2_soft_ac4dec_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -197,7 +187,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libcodec2_soft_common_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -214,7 +203,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libcodec2_soft_ddpdec_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -231,7 +219,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libcodec2_store_dolby_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -248,7 +235,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libcodec2_vndk_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -265,7 +251,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libdapparamstorage_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -282,7 +267,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libdeccfg_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -299,7 +283,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libdlbdsservice_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -316,7 +299,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "libui_sp",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -333,7 +315,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "vendor.dolby_sp.hardware.dmssp@2.0-impl",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -350,7 +331,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "vendor.dolby_sp.hardware.dmssp@2.0",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -367,7 +347,6 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
 	name: "vendor.dolby_v3_6.hardware.dms360@2.0-impl",
-	owner: "oneplus",
 	strip: {
 		none: true,
 	},
@@ -384,7 +363,6 @@ cc_prebuilt_library_shared {
 
 prebuilt_etc_xml {
 	name: "manifest_dax_dolby_v3_6.xml",
-	owner: "oneplus",
 	src: "proprietary/odm/etc/vintf/manifest/manifest_dax_dolby_v3_6.xml",
 	filename_from_src: true,
 	sub_dir: "vintf/manifest",
@@ -393,7 +371,6 @@ prebuilt_etc_xml {
 
 prebuilt_etc_xml {
 	name: "vendor.dolby.hardware.dms.xml",
-	owner: "oneplus",
 	src: "proprietary/odm/etc/vintf/manifest/vendor.dolby.hardware.dms.xml",
 	filename_from_src: true,
 	sub_dir: "vintf/manifest",
@@ -402,7 +379,6 @@ prebuilt_etc_xml {
 
 cc_prebuilt_binary {
 	name: "vendor.dolby_sp.hardware.dmssp@2.0-service",
-	owner: "oneplus",
 	target: {
 		android_arm64: {
 			srcs: ["proprietary/odm/bin/hw/vendor.dolby_sp.hardware.dmssp@2.0-service"],
@@ -420,7 +396,6 @@ cc_prebuilt_binary {
 
 cc_prebuilt_binary {
 	name: "vendor.dolby_sp.media.c2@1.0-service",
-	owner: "oneplus",
 	target: {
 		android_arm64: {
 			srcs: ["proprietary/odm/bin/hw/vendor.dolby_sp.media.c2@1.0-service"],
@@ -438,7 +413,6 @@ cc_prebuilt_binary {
 
 cc_prebuilt_binary {
 	name: "vendor.dolby_v3_6.hardware.dms360@2.0-service",
-	owner: "oneplus",
 	target: {
 		android_arm64: {
 			srcs: ["proprietary/odm/bin/hw/vendor.dolby_v3_6.hardware.dms360@2.0-service"],
