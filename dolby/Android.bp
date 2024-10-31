@@ -19,6 +19,12 @@ android_app {
         "MusicFX",
         "AudioFX",
     ],
+
+    optimize: {
+        optimize: true,
+        shrink_resources: true,
+    },
+
     static_libs: [
         "SettingsLib",
         "SpaLib",
