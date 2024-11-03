@@ -295,7 +295,8 @@ class DolbySettingsFragment : PreferenceFragment(),
             3 -> profilePref.setIcon(R.drawable.ic_profile_game1)
             4 -> profilePref.setIcon(R.drawable.ic_profile_game2)
             5 -> profilePref.setIcon(R.drawable.ic_profile_voice)
-            else -> profilePref.setIcon(R.drawable.ic_profile_custom)
+            6 -> profilePref.setIcon(R.drawable.ic_profile_custom)
+            else -> profilePref.setIcon(R.drawable.ic_dolby)
         }
     }
 
