@@ -112,6 +112,7 @@ class DolbySettingsFragment : PreferenceFragment(),
         switchBar.setChecked(dsOn)
 
         profilePref.onPreferenceChangeListener = this
+        updateProfileIcon(profile)
         profilePref.setEnabled(dsOn)
         profilePref.apply {
             if (entryValues.contains(profile.toString())) {
@@ -164,6 +165,7 @@ class DolbySettingsFragment : PreferenceFragment(),
                 val profile = newValue.toString().toInt()
                 dolbyController.profile = profile
                 (preferenceManager.preferenceDataStore as DolbyPreferenceStore).profile = profile
+                updateProfileIcon(profile)
                 updateProfileSpecificPrefs()
             }
 
@@ -282,6 +284,18 @@ class DolbySettingsFragment : PreferenceFragment(),
         hpVirtPref.apply {
             setChecked(dolbyController.getHeadphoneVirtEnabled(currentProfile))
             summary = null
+        }
+    }
+
+    private fun updateProfileIcon(profile: Int) {
+        when (profile) {
+            0 -> profilePref.setIcon(R.drawable.ic_profile_dynamic)
+            1 -> profilePref.setIcon(R.drawable.ic_profile_video)
+            2 -> profilePref.setIcon(R.drawable.ic_profile_music)
+            3 -> profilePref.setIcon(R.drawable.ic_profile_game1)
+            4 -> profilePref.setIcon(R.drawable.ic_profile_game2)
+            5 -> profilePref.setIcon(R.drawable.ic_profile_voice)
+            else -> profilePref.setIcon(R.drawable.ic_profile_custom)
         }
     }
 
