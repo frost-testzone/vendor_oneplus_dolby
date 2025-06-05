@@ -15,6 +15,7 @@ import android.os.Handler
 import android.widget.CompoundButton
 import android.widget.CompoundButton.OnCheckedChangeListener
 import android.widget.Toast
+import androidx.core.os.postDelayed
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
@@ -162,7 +163,7 @@ class DolbySettingsFragment : PreferenceFragment(),
                 val profile = newValue.toString().toInt()
                 dolbyController.profile = profile
                 (preferenceManager.preferenceDataStore as DolbyPreferenceStore).profile = profile
-                updateProfileSpecificPrefs()
+                handler.postDelayed(100) { updateProfileSpecificPrefs() }
             }
 
             PREF_SPK_VIRTUALIZER -> {
