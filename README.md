@@ -32,6 +32,12 @@
 $(call inherit-product, vendor/oneplus/dolby/dolby.mk)
 ```
 
+- Include dolby Board Config by adding this line in your Board Config makefile (`BoardConfig.mk`) :-
+
+```
+include vendor/oneplus/dolby/BoardConfigDolby.mk
+```
+
 - Finally, inherit the FCM and manifest from the Dolby repository. For example :-
 
 ```
