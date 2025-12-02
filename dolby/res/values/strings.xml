@@ -29,8 +29,8 @@
     <string name="dolby_hp_virtualizer_strength">Headphone surround virtualizer strength</string>
     <string name="dolby_volume_leveler">Volume leveler</string>
     <string name="dolby_connect_headphones">Connect headphones</string>
-    <string name="dolby_reset_all">Reset profiles</string>
-    <string name="dolby_reset_all_message">This will reset all profiles to factory defaults.</string>
+    <string name="dolby_reset_all">Reset profiles?</string>
+    <string name="dolby_reset_all_message">This will reset all profiles to factory defaults</string>
     <string name="dolby_reset_all_toast">Succesfully reset all profiles</string>
 
     <!-- Dolby intro -->
