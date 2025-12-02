@@ -33,6 +33,9 @@
     <string name="dolby_reset_all_message">This will reset all profiles to factory defaults.</string>
     <string name="dolby_reset_all_toast">Succesfully reset all profiles</string>
 
+    <!-- Dolby intro -->
+    <string name="dolby_top_intro_summary">Experience breakthrough audio for media playback that flows above and around you</string>
+
     <!-- Dolby profiles -->
     <string name="dolby_profile_dynamic">Dynamic</string>
     <string name="dolby_profile_video">Movie/Video</string>
