@@ -295,6 +295,7 @@ cc_prebuilt_library_shared {
                 "proprietary/odm/lib64/libcodec2_hidl@1.0_sp.so",
             ],
             shared_libs: [
+                "libbase_shim",
                 "dolbycodec_shim",
                 "android.hardware.graphics.bufferqueue@1.0",
                 "android.hardware.graphics.bufferqueue@2.0",

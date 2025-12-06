@@ -34,6 +34,7 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
     'odm/lib64/libcodec2_hidl@1.0_sp.so': blob_fixup()
         .add_needed('dolbycodec_shim.so')
+        .add_needed('libbase_shim.so')
         .replace_needed('libcodec2_hidl_plugin.so', 'libcodec2_hidl_plugin_sp.so')
         .replace_needed('libcodec2_vndk.so', 'libcodec2_vndk_sp.so')
         .replace_needed('libui.so', 'libui_sp.so'),
