@@ -28,67 +28,57 @@ fun PresetNameDialog(
     title: String,
     presetName: String = "",
     onPresetNameSet: (String) -> PresetNameValidationError?,
-    onDismissDialog: () -> Unit
+    onDismissDialog: () -> Unit,
 ) {
-    var showDialog by remember { mutableStateOf(true) }
-    if (!showDialog) {
-        onDismissDialog()
-        return
-    }
-    var text by remember { mutableStateOf(presetName) }
-    var error by remember { mutableStateOf<PresetNameValidationError?>(null) }
+  var showDialog by remember { mutableStateOf(true) }
+  if (!showDialog) {
+    onDismissDialog()
+    return
+  }
+  var text by remember { mutableStateOf(presetName) }
+  var error by remember { mutableStateOf<PresetNameValidationError?>(null) }
 
-    AlertDialog(
-        onDismissRequest = { showDialog = false },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onPresetNameSet(text)?.let {
-                        // validation failed
-                        error = it
-                        return@TextButton
-                    }
-                    // succeeded
-                    showDialog = false
-                    error = null
-                }
-            ) {
-                Text(
-                    stringResource(id = android.R.string.ok)
-                )
+  AlertDialog(
+      onDismissRequest = { showDialog = false },
+      confirmButton = {
+        TextButton(
+            onClick = {
+              onPresetNameSet(text)?.let {
+                // validation failed
+                error = it
+                return@TextButton
+              }
+              // succeeded
+              showDialog = false
+              error = null
             }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = { showDialog = false }
-            ) {
-                Text(
-                    stringResource(id = android.R.string.cancel)
-                )
-            }
-        },
-        title = { Text(title) },
-        text = {
-            Column {
-                OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
-                    label = {
-                        Text(
-                            stringResource(id = R.string.dolby_geq_preset_name)
-                        )
-                    },
-                    isError = error != null,
-                    singleLine = true
-                )
-                error?.let {
-                    Text(
-                        text = it.toErrorMessage(),
-                        color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                }
-            }
+        ) {
+          Text(stringResource(id = android.R.string.ok))
         }
-    )
+      },
+      dismissButton = {
+        TextButton(onClick = { showDialog = false }) {
+          Text(stringResource(id = android.R.string.cancel))
+        }
+      },
+      title = { Text(title) },
+      text = {
+        Column {
+          OutlinedTextField(
+              value = text,
+              onValueChange = { text = it },
+              label = { Text(stringResource(id = R.string.dolby_geq_preset_name)) },
+              isError = error != null,
+              singleLine = true,
+          )
+          error?.let {
+            Text(
+                text = it.toErrorMessage(),
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(top = 8.dp),
+            )
+          }
+        }
+      },
+  )
 }

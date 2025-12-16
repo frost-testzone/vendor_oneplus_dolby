@@ -25,29 +25,20 @@ import com.android.settingslib.spa.widget.scaffold.SettingsScaffold
 
 class EqualizerActivity : ComponentActivity() {
 
-    private val viewModel: EqualizerViewModel by viewModels { EqualizerViewModel.Factory }
+  private val viewModel: EqualizerViewModel by viewModels { EqualizerViewModel.Factory }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            SettingsTheme {
-                MainContent()
-            }
-        }
-    }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContent { SettingsTheme { MainContent() } }
+  }
 
-    @Composable
-    private fun MainContent() {
-        val navController = rememberNavController()
-        CompositionLocalProvider(navController.localNavController()) {
-            SettingsScaffold(
-                title = stringResource(id = R.string.dolby_preset)
-            ) { paddingValues ->
-                EqualizerScreen(
-                    viewModel = viewModel,
-                    modifier = Modifier.padding(paddingValues)
-                )
-            }
-        }
+  @Composable
+  private fun MainContent() {
+    val navController = rememberNavController()
+    CompositionLocalProvider(navController.localNavController()) {
+      SettingsScaffold(title = stringResource(id = R.string.dolby_preset)) { paddingValues ->
+        EqualizerScreen(viewModel = viewModel, modifier = Modifier.padding(paddingValues))
+      }
     }
+  }
 }

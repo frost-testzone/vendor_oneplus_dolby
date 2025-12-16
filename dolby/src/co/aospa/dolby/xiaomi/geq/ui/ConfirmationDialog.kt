@@ -17,42 +17,30 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun ConfirmationDialog(
-    text: String,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit
-) {
-    var showDialog by remember { mutableStateOf(true) }
-    if (!showDialog) {
-        onDismiss()
-        return
-    }
+fun ConfirmationDialog(text: String, onConfirm: () -> Unit, onDismiss: () -> Unit) {
+  var showDialog by remember { mutableStateOf(true) }
+  if (!showDialog) {
+    onDismiss()
+    return
+  }
 
-    AlertDialog(
-        onDismissRequest = { showDialog = false },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    showDialog = false
-                    onConfirm()
-                }
-            ) {
-                Text(
-                    stringResource(id = android.R.string.ok)
-                )
+  AlertDialog(
+      onDismissRequest = { showDialog = false },
+      confirmButton = {
+        TextButton(
+            onClick = {
+              showDialog = false
+              onConfirm()
             }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = { showDialog = false }
-            ) {
-                Text(
-                    stringResource(id = android.R.string.cancel)
-                )
-            }
-        },
-        text = {
-            Text(text)
+        ) {
+          Text(stringResource(id = android.R.string.ok))
         }
-    )
+      },
+      dismissButton = {
+        TextButton(onClick = { showDialog = false }) {
+          Text(stringResource(id = android.R.string.cancel))
+        }
+      },
+      text = { Text(text) },
+  )
 }

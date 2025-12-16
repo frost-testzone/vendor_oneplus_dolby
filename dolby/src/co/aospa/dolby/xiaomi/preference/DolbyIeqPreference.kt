@@ -8,7 +8,6 @@ package co.aospa.dolby.xiaomi.preference
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.preference.ListPreference
@@ -21,22 +20,22 @@ class DolbyIeqPreference(
     attrs: AttributeSet?,
 ) : ListPreference(context, attrs) {
 
-    init {
-        widgetLayoutResource = R.layout.ieq_icon_layout
-    }
+  init {
+    widgetLayoutResource = R.layout.ieq_icon_layout
+  }
 
-    override fun onBindViewHolder(holder: PreferenceViewHolder) {
-        super.onBindViewHolder(holder)
-        val iconView = holder.findViewById(R.id.ieq_icon)!! as ImageView
-        val icon = AppCompatResources.getDrawable(context, getIeqIconResId())
-        iconView.setImageDrawable(icon)
-    }
+  override fun onBindViewHolder(holder: PreferenceViewHolder) {
+    super.onBindViewHolder(holder)
+    val iconView = holder.findViewById(R.id.ieq_icon)!! as ImageView
+    val icon = AppCompatResources.getDrawable(context, getIeqIconResId())
+    iconView.setImageDrawable(icon)
+  }
 
-    private fun getIeqIconResId(): Int =
-        when (findIndexOfValue(value)) {
-            1 -> R.drawable.ic_ieq_detailed
-            2 -> R.drawable.ic_ieq_balanced
-            3 -> R.drawable.ic_ieq_warm
-            else -> R.drawable.ic_ieq_off
-        }
+  private fun getIeqIconResId(): Int =
+      when (findIndexOfValue(value)) {
+        1 -> R.drawable.ic_ieq_detailed
+        2 -> R.drawable.ic_ieq_balanced
+        3 -> R.drawable.ic_ieq_warm
+        else -> R.drawable.ic_ieq_off
+      }
 }
