@@ -17,11 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun ConfirmationDialog(
-    text: String,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit
-) {
+fun ConfirmationDialog(text: String, onConfirm: () -> Unit, onDismiss: () -> Unit) {
     var showDialog by remember { mutableStateOf(true) }
     if (!showDialog) {
         onDismiss()
@@ -37,22 +33,14 @@ fun ConfirmationDialog(
                     onConfirm()
                 }
             ) {
-                Text(
-                    stringResource(id = android.R.string.ok)
-                )
+                Text(stringResource(id = android.R.string.ok))
             }
         },
         dismissButton = {
-            TextButton(
-                onClick = { showDialog = false }
-            ) {
-                Text(
-                    stringResource(id = android.R.string.cancel)
-                )
+            TextButton(onClick = { showDialog = false }) {
+                Text(stringResource(id = android.R.string.cancel))
             }
         },
-        text = {
-            Text(text)
-        }
+        text = { Text(text) },
     )
 }

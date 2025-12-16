@@ -25,7 +25,7 @@ class DolbySettingsActivity : CollapsingToolbarBaseActivity() {
             .replace(
                 com.android.settingslib.collapsingtoolbar.R.id.content_frame,
                 DolbySettingsFragment(),
-                TAG
+                TAG,
             )
             .commit()
         dolbyController = DolbyController.getInstance(this)

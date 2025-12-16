@@ -28,7 +28,7 @@ fun PresetNameDialog(
     title: String,
     presetName: String = "",
     onPresetNameSet: (String) -> PresetNameValidationError?,
-    onDismissDialog: () -> Unit
+    onDismissDialog: () -> Unit,
 ) {
     var showDialog by remember { mutableStateOf(true) }
     if (!showDialog) {
@@ -53,18 +53,12 @@ fun PresetNameDialog(
                     error = null
                 }
             ) {
-                Text(
-                    stringResource(id = android.R.string.ok)
-                )
+                Text(stringResource(id = android.R.string.ok))
             }
         },
         dismissButton = {
-            TextButton(
-                onClick = { showDialog = false }
-            ) {
-                Text(
-                    stringResource(id = android.R.string.cancel)
-                )
+            TextButton(onClick = { showDialog = false }) {
+                Text(stringResource(id = android.R.string.cancel))
             }
         },
         title = { Text(title) },
@@ -73,22 +67,18 @@ fun PresetNameDialog(
                 OutlinedTextField(
                     value = text,
                     onValueChange = { text = it },
-                    label = {
-                        Text(
-                            stringResource(id = R.string.dolby_geq_preset_name)
-                        )
-                    },
+                    label = { Text(stringResource(id = R.string.dolby_geq_preset_name)) },
                     isError = error != null,
-                    singleLine = true
+                    singleLine = true,
                 )
                 error?.let {
                     Text(
                         text = it.toErrorMessage(),
                         color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.padding(top = 8.dp)
+                        modifier = Modifier.padding(top = 8.dp),
                     )
                 }
             }
-        }
+        },
     )
 }

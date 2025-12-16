@@ -19,9 +19,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.withContext
 
-class EqualizerRepository(
-    private val context: Context
-) {
+class EqualizerRepository(private val context: Context) {
 
     private val dolbyController by lazy { DolbyController.getInstance(context) }
 
@@ -29,31 +27,18 @@ class EqualizerRepository(
     // and is unique to each profile ID
     private val profile = dolbyController.profile
     private val profileSharedPrefs by lazy {
-        context.getSharedPreferences(
-            "profile_$profile",
-            Context.MODE_PRIVATE
-        )
+        context.getSharedPreferences("profile_$profile", Context.MODE_PRIVATE)
     }
 
     private val presetsSharedPrefs by lazy {
-        context.getSharedPreferences(
-            "presets",
-            Context.MODE_PRIVATE
-        )
+        context.getSharedPreferences("presets", Context.MODE_PRIVATE)
     }
 
     val builtInPresets: List<Preset> by lazy {
-        val names = context.resources.getStringArray(
-            R.array.dolby_preset_entries
-        )
-        val presets = context.resources.getStringArray(
-            R.array.dolby_preset_values
-        )
+        val names = context.resources.getStringArray(R.array.dolby_preset_entries)
+        val presets = context.resources.getStringArray(R.array.dolby_preset_values)
         List(names.size) { index ->
-            Preset(
-                name = names[index],
-                bandGains = deserializeGains(presets[index]),
-            )
+            Preset(name = names[index], bandGains = deserializeGains(presets[index]))
         }
     }
 
@@ -63,18 +48,19 @@ class EqualizerRepository(
     // key - preset name
     // value - comma separated string of gains
     val userPresets: Flow<List<Preset>> = callbackFlow {
-        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
-            dlog(TAG, "presetsSharedPrefs changed")
-            trySend(
-                presetsSharedPrefs.all.map { (key, value) ->
-                    Preset(
-                        name = key,
-                        bandGains = deserializeGains(value.toString()),
-                        isUserDefined = true
-                    )
-                }
-            )
-        }
+        val listener =
+            SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
+                dlog(TAG, "presetsSharedPrefs changed")
+                trySend(
+                    presetsSharedPrefs.all.map { (key, value) ->
+                        Preset(
+                            name = key,
+                            bandGains = deserializeGains(value.toString()),
+                            isUserDefined = true,
+                        )
+                    }
+                )
+            }
 
         presetsSharedPrefs.registerOnSharedPreferenceChangeListener(listener)
         dlog(TAG, "presetsSharedPrefs registered listener")
@@ -87,82 +73,63 @@ class EqualizerRepository(
         }
     }
 
-    suspend fun getBandGains(): List<BandGain> = withContext(Dispatchers.IO) {
-        val gains = profileSharedPrefs.getString(PREF_PRESET, dolbyController.getPreset())
-        return@withContext if (gains.isNullOrEmpty()) {
-            defaultPreset.bandGains
-        } else {
-            deserializeGains(gains)
-        }.also {
-            dlog(TAG, "getBandGains: $it")
+    suspend fun getBandGains(): List<BandGain> =
+        withContext(Dispatchers.IO) {
+            val gains = profileSharedPrefs.getString(PREF_PRESET, dolbyController.getPreset())
+            return@withContext if (gains.isNullOrEmpty()) {
+                    defaultPreset.bandGains
+                } else {
+                    deserializeGains(gains)
+                }
+                .also { dlog(TAG, "getBandGains: $it") }
         }
-    }
 
-    suspend fun setBandGains(bandGains: List<BandGain>) = withContext(Dispatchers.IO) {
-        dlog(TAG, "setBandGains($bandGains)")
-        val gains = serializeGains(bandGains)
-        dolbyController.setPreset(gains)
-        profileSharedPrefs.edit()
-            .putString(PREF_PRESET, gains)
-            .apply()
-    }
+    suspend fun setBandGains(bandGains: List<BandGain>) =
+        withContext(Dispatchers.IO) {
+            dlog(TAG, "setBandGains($bandGains)")
+            val gains = serializeGains(bandGains)
+            dolbyController.setPreset(gains)
+            profileSharedPrefs.edit().putString(PREF_PRESET, gains).apply()
+        }
 
-    suspend fun addPreset(preset: Preset) = withContext(Dispatchers.IO) {
-        dlog(TAG, "addPreset($preset)")
-        presetsSharedPrefs.edit()
-            .putString(preset.name, serializeGains(preset.bandGains))
-            .apply()
-    }
+    suspend fun addPreset(preset: Preset) =
+        withContext(Dispatchers.IO) {
+            dlog(TAG, "addPreset($preset)")
+            presetsSharedPrefs
+                .edit()
+                .putString(preset.name, serializeGains(preset.bandGains))
+                .apply()
+        }
 
-    suspend fun removePreset(preset: Preset) = withContext(Dispatchers.IO) {
-        dlog(TAG, "removePreset($preset)")
-        presetsSharedPrefs.edit()
-            .remove(preset.name)
-            .apply()
-    }
+    suspend fun removePreset(preset: Preset) =
+        withContext(Dispatchers.IO) {
+            dlog(TAG, "removePreset($preset)")
+            presetsSharedPrefs.edit().remove(preset.name).apply()
+        }
 
     private companion object {
         const val TAG = "EqRepository"
 
-        val tenBandFreqs = intArrayOf(
-            32,
-            64,
-            125,
-            250,
-            500,
-            1000,
-            2000,
-            4000,
-            8000,
-            16000
-        )
+        val tenBandFreqs = intArrayOf(32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000)
 
         fun deserializeGains(bandGains: String): List<BandGain> {
             val gains: List<Int> =
-                bandGains.split(",").runCatching {
-                    require(size == 20) {
-                        "Preset must have 20 elements, has only $size!"
+                bandGains
+                    .split(",")
+                    .runCatching {
+                        require(size == 20) { "Preset must have 20 elements, has only $size!" }
+                        map { it.toInt() }.twentyToTenBandGains()
                     }
-                    map { it.toInt() }
-                        .twentyToTenBandGains()
-                }.onFailure { exception ->
-                    Log.e(TAG, "Failed to parse preset", exception)
-                }.getOrDefault(
-                    // fallback to flat
-                    List<Int>(10) { 0 }
-                )
-            return List(10) { index ->
-                BandGain(
-                    band = tenBandFreqs[index],
-                    gain = gains[index]
-                )
-            }
+                    .onFailure { exception -> Log.e(TAG, "Failed to parse preset", exception) }
+                    .getOrDefault(
+                        // fallback to flat
+                        List<Int>(10) { 0 }
+                    )
+            return List(10) { index -> BandGain(band = tenBandFreqs[index], gain = gains[index]) }
         }
 
         fun serializeGains(bandGains: List<BandGain>): String {
-            return bandGains.map { it.gain }
-                .tenToTwentyBandGains()
-                .joinToString(",")
+            return bandGains.map { it.gain }.tenToTwentyBandGains().joinToString(",")
         }
 
         // we show only 10 bands in UI however backend requires 20 bands

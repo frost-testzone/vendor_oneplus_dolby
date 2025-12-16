@@ -6,7 +6,6 @@
 
 package co.aospa.dolby.xiaomi.geq.ui
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
@@ -20,19 +19,12 @@ fun EqualizerBands(viewModel: EqualizerViewModel) {
     val preset by viewModel.preset.collectAsState()
     val bandGains = preset.bandGains
 
-    LazyRow(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        item {
-            BandGainSliderLabels()
-        }
+    LazyRow(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+        item { BandGainSliderLabels() }
         items(bandGains.size) { index ->
             BandGainSlider(
                 bandGains[index],
-                onValueChangeFinished = {
-                    viewModel.setGain(index, it)
-                }
+                onValueChangeFinished = { viewModel.setGain(index, it) },
             )
         }
     }

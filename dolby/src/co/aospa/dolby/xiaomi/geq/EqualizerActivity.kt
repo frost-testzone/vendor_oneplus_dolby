@@ -29,24 +29,15 @@ class EqualizerActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            SettingsTheme {
-                MainContent()
-            }
-        }
+        setContent { SettingsTheme { MainContent() } }
     }
 
     @Composable
     private fun MainContent() {
         val navController = rememberNavController()
         CompositionLocalProvider(navController.localNavController()) {
-            SettingsScaffold(
-                title = stringResource(id = R.string.dolby_preset)
-            ) { paddingValues ->
-                EqualizerScreen(
-                    viewModel = viewModel,
-                    modifier = Modifier.padding(paddingValues)
-                )
+            SettingsScaffold(title = stringResource(id = R.string.dolby_preset)) { paddingValues ->
+                EqualizerScreen(viewModel = viewModel, modifier = Modifier.padding(paddingValues))
             }
         }
     }

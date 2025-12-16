@@ -14,14 +14,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.CompoundButton
 import android.widget.CompoundButton.OnCheckedChangeListener
-import android.widget.Toast
 import androidx.core.os.postDelayed
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
 import androidx.preference.PreferenceCategory
 import androidx.preference.SwitchPreferenceCompat
-import co.aospa.dolby.xiaomi.DolbyConstants
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_BASS
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE_AMOUNT
@@ -30,7 +28,6 @@ import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_HP_VIRTUALIZER
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_IEQ
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_PRESET
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_PROFILE
-import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_RESET
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_SPK_VIRTUALIZER
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_STEREO_WIDENING
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_VOLUME
@@ -41,33 +38,19 @@ import com.android.settingslib.widget.MainSwitchPreference
 import com.android.settingslib.widget.SettingsBasePreferenceFragment
 import com.android.settingslib.widget.SliderPreference
 
-class DolbySettingsFragment : SettingsBasePreferenceFragment(),
-    OnPreferenceChangeListener, OnCheckedChangeListener {
+class DolbySettingsFragment :
+    SettingsBasePreferenceFragment(), OnPreferenceChangeListener, OnCheckedChangeListener {
 
-    private val switchBar by lazy {
-        findPreference<MainSwitchPreference>(PREF_ENABLE)!!
-    }
-    private val profilePref by lazy {
-        findPreference<ListPreference>(PREF_PROFILE)!!
-    }
-    private val presetPref by lazy {
-        findPreference<Preference>(PREF_PRESET)!!
-    }
-    private val ieqPref by lazy {
-        findPreference<DolbyIeqPreference>(PREF_IEQ)!!
-    }
-    private val dialoguePref by lazy {
-        findPreference<SwitchPreferenceCompat>(PREF_DIALOGUE)!!
-    }
+    private val switchBar by lazy { findPreference<MainSwitchPreference>(PREF_ENABLE)!! }
+    private val profilePref by lazy { findPreference<ListPreference>(PREF_PROFILE)!! }
+    private val presetPref by lazy { findPreference<Preference>(PREF_PRESET)!! }
+    private val ieqPref by lazy { findPreference<DolbyIeqPreference>(PREF_IEQ)!! }
+    private val dialoguePref by lazy { findPreference<SwitchPreferenceCompat>(PREF_DIALOGUE)!! }
     private val dialogueAmountPref by lazy {
         findPreference<SliderPreference>(PREF_DIALOGUE_AMOUNT)!!
     }
-    private val bassPref by lazy {
-        findPreference<SwitchPreferenceCompat>(PREF_BASS)!!
-    }
-    private val hpVirtPref by lazy {
-        findPreference<SwitchPreferenceCompat>(PREF_HP_VIRTUALIZER)!!
-    }
+    private val bassPref by lazy { findPreference<SwitchPreferenceCompat>(PREF_BASS)!! }
+    private val hpVirtPref by lazy { findPreference<SwitchPreferenceCompat>(PREF_HP_VIRTUALIZER)!! }
     private val spkVirtPref by lazy {
         findPreference<SwitchPreferenceCompat>(PREF_SPK_VIRTUALIZER)!!
     }
@@ -84,7 +67,9 @@ class DolbySettingsFragment : SettingsBasePreferenceFragment(),
     private var stereoPref: SliderPreference? = null
 
     private val dolbyController by lazy { DolbyController.getInstance(requireContext()) }
-    private val audioManager by lazy { requireContext().getSystemService(AudioManager::class.java)!! }
+    private val audioManager by lazy {
+        requireContext().getSystemService(AudioManager::class.java)!!
+    }
     private val handler = Handler()
 
     private var isOnSpeaker = true
@@ -95,17 +80,18 @@ class DolbySettingsFragment : SettingsBasePreferenceFragment(),
             updateProfileSpecificPrefs()
         }
 
-    private val audioDeviceCallback = object : AudioDeviceCallback() {
-        override fun onAudioDevicesAdded(addedDevices: Array<AudioDeviceInfo>) {
-            dlog(TAG, "onAudioDevicesAdded")
-            updateSpeakerState()
-        }
+    private val audioDeviceCallback =
+        object : AudioDeviceCallback() {
+            override fun onAudioDevicesAdded(addedDevices: Array<AudioDeviceInfo>) {
+                dlog(TAG, "onAudioDevicesAdded")
+                updateSpeakerState()
+            }
 
-        override fun onAudioDevicesRemoved(removedDevices: Array<AudioDeviceInfo>) {
-            dlog(TAG, "onAudioDevicesRemoved")
-            updateSpeakerState()
+            override fun onAudioDevicesRemoved(removedDevices: Array<AudioDeviceInfo>) {
+                dlog(TAG, "onAudioDevicesRemoved")
+                updateSpeakerState()
+            }
         }
-    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         dlog(TAG, "onCreatePreferences")
@@ -123,9 +109,8 @@ class DolbySettingsFragment : SettingsBasePreferenceFragment(),
             volumePref = null
         }
 
-        preferenceManager.preferenceDataStore = DolbyPreferenceStore(requireContext()).also {
-            it.profile = dolbyController.profile
-        }
+        preferenceManager.preferenceDataStore =
+            DolbyPreferenceStore(requireContext()).also { it.profile = dolbyController.profile }
 
         val dsOn = dolbyController.dsOn
         switchBar.addOnSwitchChangeListener(this)
@@ -289,8 +274,7 @@ class DolbySettingsFragment : SettingsBasePreferenceFragment(),
 
     companion object {
         private const val TAG = "DolbySettingsFragment"
-        private val ATTRIBUTES_MEDIA = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_MEDIA)
-                .build()
+        private val ATTRIBUTES_MEDIA =
+            AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build()
     }
 }

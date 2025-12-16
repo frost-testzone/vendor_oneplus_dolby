@@ -12,9 +12,7 @@ import androidx.preference.PreferenceDataStore
 import androidx.preference.PreferenceManager
 import co.aospa.dolby.xiaomi.DolbyConstants
 
-class DolbyPreferenceStore(
-    private val context: Context
-) : PreferenceDataStore() {
+class DolbyPreferenceStore(private val context: Context) : PreferenceDataStore() {
 
     private val defaultSharedPrefs by lazy {
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -25,10 +23,8 @@ class DolbyPreferenceStore(
     var profile = 0
         set(value) {
             field = value
-            profileSharedPrefs = context.getSharedPreferences(
-                "profile_$value",
-                Context.MODE_PRIVATE
-            )
+            profileSharedPrefs =
+                context.getSharedPreferences("profile_$value", Context.MODE_PRIVATE)
         }
 
     private fun getSharedPreferences(key: String) =
@@ -39,25 +35,19 @@ class DolbyPreferenceStore(
         }
 
     override fun putBoolean(key: String, value: Boolean) =
-        getSharedPreferences(key).edit()
-                .putBoolean(key, value)
-                .apply()
+        getSharedPreferences(key).edit().putBoolean(key, value).apply()
 
     override fun getBoolean(key: String, defValue: Boolean) =
         getSharedPreferences(key).getBoolean(key, defValue)
 
     override fun putInt(key: String, value: Int) =
-        getSharedPreferences(key).edit()
-                .putInt(key, value)
-                .apply()
+        getSharedPreferences(key).edit().putInt(key, value).apply()
 
     override fun getInt(key: String, defValue: Int) =
         getSharedPreferences(key).getInt(key, defValue)
 
     override fun putString(key: String, value: String?) =
-        getSharedPreferences(key).edit()
-                .putString(key, value)
-                .apply()
+        getSharedPreferences(key).edit().putString(key, value).apply()
 
     override fun getString(key: String, defValue: String?) =
         getSharedPreferences(key).getString(key, defValue)

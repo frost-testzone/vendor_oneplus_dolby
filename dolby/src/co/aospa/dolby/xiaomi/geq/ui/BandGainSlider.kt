@@ -28,53 +28,43 @@ import androidx.compose.ui.unit.sp
 import co.aospa.dolby.xiaomi.geq.data.BandGain
 
 @Composable
-fun BandGainSlider(
-    bandGain: BandGain,
-    onValueChangeFinished: (Int) -> Unit
-) {
+fun BandGainSlider(bandGain: BandGain, onValueChangeFinished: (Int) -> Unit) {
     // Gain range is of -1->1 in UI, -100->100 in backend, but actually is -10->10 dB.
 
     // Ensure we update the slider when gain is changed,
     // for eg. when changing the preset
-    var sliderPosition by remember(bandGain.gain) {
-        mutableFloatStateOf(bandGain.gain / 100f)
-    }
+    var sliderPosition by remember(bandGain.gain) { mutableFloatStateOf(bandGain.gain / 100f) }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        SliderText(
-            "%.1f".format(sliderPosition * 10f)
-        )
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        SliderText("%.1f".format(sliderPosition * 10f))
         Slider(
             value = sliderPosition,
             onValueChange = { sliderPosition = it },
-            onValueChangeFinished = {
-                onValueChangeFinished((sliderPosition * 100f).toInt())
-            },
+            onValueChangeFinished = { onValueChangeFinished((sliderPosition * 100f).toInt()) },
             valueRange = -1f..1f,
-            modifier = Modifier
-                .graphicsLayer {
-                    rotationZ = 270f
-                    transformOrigin = TransformOrigin(0f, 0f)
-                }
-                .layout { measurable, constraints ->
-                    val placeable = measurable.measure(
-                        Constraints(
-                            minWidth = constraints.minHeight,
-                            maxWidth = constraints.maxHeight,
-                            minHeight = constraints.minWidth,
-                            maxHeight = constraints.maxHeight,
-                        )
-                    )
-                    layout(placeable.height, placeable.width) {
-                        placeable.place(-placeable.width, 0)
+            modifier =
+                Modifier.graphicsLayer {
+                        rotationZ = 270f
+                        transformOrigin = TransformOrigin(0f, 0f)
                     }
-                }
-                // horizontal and vertical dimensions are inverted due to rotation
-                .width(200.dp)
-                .height(40.dp)
-                .padding(8.dp)
+                    .layout { measurable, constraints ->
+                        val placeable =
+                            measurable.measure(
+                                Constraints(
+                                    minWidth = constraints.minHeight,
+                                    maxWidth = constraints.maxHeight,
+                                    minHeight = constraints.minWidth,
+                                    maxHeight = constraints.maxHeight,
+                                )
+                            )
+                        layout(placeable.height, placeable.width) {
+                            placeable.place(-placeable.width, 0)
+                        }
+                    }
+                    // horizontal and vertical dimensions are inverted due to rotation
+                    .width(200.dp)
+                    .height(40.dp)
+                    .padding(8.dp),
         )
         SliderText(
             with(bandGain.band) {
@@ -89,13 +79,6 @@ fun BandGainSlider(
 }
 
 @Composable
-fun SliderText(
-    text: String,
-    modifier: Modifier = Modifier
-) {
-    Text(
-        text = text,
-        modifier = modifier,
-        fontSize = 12.sp
-    )
+fun SliderText(text: String, modifier: Modifier = Modifier) {
+    Text(text = text, modifier = modifier, fontSize = 12.sp)
 }
