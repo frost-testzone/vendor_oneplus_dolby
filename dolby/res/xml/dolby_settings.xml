@@ -64,7 +64,7 @@
 
         <com.android.settingslib.widget.SliderPreference
             android:key="dolby_stereo_widening"
-            android:title="@string/dolby_strength"
+            android:title="@string/dolby_hp_virtualizer_strength"
             android:dependency="dolby_virtualizer"
             android:min="@integer/stereo_widening_min"
             android:max="@integer/stereo_widening_max"/>
@@ -75,7 +75,7 @@
 
         <com.android.settingslib.widget.SliderPreference
             android:key="dolby_dialogue_amount"
-            android:title="@string/dolby_strength"
+            android:title="@string/dolby_dialogue_enhancer_strength"
             android:dependency="dolby_dialogue_enabled"
             android:min="@integer/dialogue_enhancer_min"
             android:max="@integer/dialogue_enhancer_max"/>

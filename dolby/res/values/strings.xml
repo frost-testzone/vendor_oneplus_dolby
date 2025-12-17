@@ -23,14 +23,15 @@
     <string name="dolby_adv_settings_footer">Choose a different profile to show advanced settings.</string>
     <string name="dolby_bass_enhancer">Bass enhancer</string>
     <string name="dolby_dialogue_enhancer">Dialogue enhancer</string>
+    <string name="dolby_dialogue_enhancer_strength">Dialogue enhancer strength</string>
     <string name="dolby_spk_virtualizer">Speaker surround virtualizer</string>
     <string name="dolby_hp_virtualizer">Headphone surround virtualizer</string>
+    <string name="dolby_hp_virtualizer_strength">Headphone surround virtualizer strength</string>
     <string name="dolby_volume_leveler">Volume leveler</string>
     <string name="dolby_connect_headphones">Connect headphones</string>
     <string name="dolby_reset_all">Reset profiles</string>
     <string name="dolby_reset_all_message">This will reset all profiles to factory defaults.</string>
     <string name="dolby_reset_all_toast">Succesfully reset all profiles</string>
-    <string name="dolby_strength">Strength</string>
 
     <!-- Dolby profiles -->
     <string name="dolby_profile_dynamic">Dynamic</string>
