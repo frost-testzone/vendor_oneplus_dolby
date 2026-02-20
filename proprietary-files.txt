@@ -16,17 +16,17 @@ odm/lib64/libdlbdsservice_v3_6.so|08ae454ff029791ba436f750ca6c717cb6d7bf36|a8105
 odm/lib64/vendor.dolby_v3_6.hardware.dms360@2.0-impl.so|5b5f4b383c03a6aaa759b1cc7f6f0aea7d1f6ba0
 odm/lib64/vendor.dolby_v3_6.hardware.dms360@2.0.so|e62f04117fead61eea7f2593e7ccbb565436a0ee
 
-# Dolby Media - from OnePlus 11 CPH2447_16.0.1.300(EX01)
+# Dolby Media - from OnePlus 11 CPH2447_16.0.3.500(EX01)
 odm/bin/hw/vendor.dolby_sp.hardware.dmssp@2.0-service|1240cecce2ad8943c2aa5b96381ebeb5e1bac43d
 odm/bin/hw/vendor.dolby_sp.media.c2@1.0-service|cafd800a4e83afa206347886cfed48cdb50cb80c|474935cbe8584567aa932f4284409e81e60eaae2
 odm/etc/init/vendor.dolby.media.c2@1.0-service.rc|6af989419070ea6b4646f47ab78849d7549abda3
 odm/etc/init/vendor.dolby_sp.hardware.dmssp@2.0-service.rc|94c85fbfc93527395fcc1bb7bfb58734f245d4f3
 odm/etc/vintf/manifest/vendor.dolby.hardware.dms.xml|dc9ebef89624d524fe76724e9a220b5d2affe62b
 odm/lib64/libcodec2_hidl@1.0.so:odm/lib64/libcodec2_hidl@1.0_sp.so;FIX_SONAME|4b662f2ecc5c66874f93407c48f492b2d09ce47c|80033df57e9af2e61bffb24cdd4e34c1dfb8dd34
-odm/lib64/libcodec2_hidl_plugin.so:odm/lib64/libcodec2_hidl_plugin_sp.so;FIX_SONAME|c62d124523c4ff624603ab0565d59d63109e64c1|3b7e566056707f522c22c2f3a79e5c59b8919cb8
+odm/lib64/libcodec2_hidl_plugin.so:odm/lib64/libcodec2_hidl_plugin_sp.so;FIX_SONAME|11667d20bb60666d133f09a3325c2d8a142fcd55|4e3a9e9df8c9ee2202fc63117add052bf874f3a8
 odm/lib64/libcodec2_soft_ac4dec_sp.so|b22d228a84b1698bca8c95aaf67324f47a8262bb|c49695f1b4c2f88d133d67c4acc22c341aeb3a80
 odm/lib64/libcodec2_soft_common.so:odm/lib64/libcodec2_soft_common_sp.so;FIX_SONAME|5cce54ffe4e82ca9d6ca6606ac66b599ac28ea71|4f12770ce036ce5e6cd2424fafe16614ed676c61
-odm/lib64/libcodec2_soft_ddpdec_sp.so|c2034f16911dd7ae4c58c4e05c4f54b4293faef3|d897c315006009d4c7405488f246f4de4a81b87d
+odm/lib64/libcodec2_soft_ddpdec_sp.so|9cef68d72cc79052f8fa37375eab0b0e44186adf|f984814b9245cb6ca41d35cac98c5d034579253a
 odm/lib64/libcodec2_store_dolby_sp.so|4b9e3bd2fd8ffd49d50b81926cb89f7916c7a212|f1a59b096f7be5a2f09d0648742ec77c46dba06d
 odm/lib64/libdapparamstorage_sp.so|f275e0f47c40b72890ee1cde373e60b4b2ffd711
 odm/lib64/libdeccfg_sp.so|e7f27c1009baecf84835deee1a7e296c5dc3f4e6
